@@ -1,1 +1,1 @@
-import mysql as m
+import mysql.connector as m
