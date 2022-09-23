@@ -44,6 +44,6 @@ def makeWindow():
     
 def confirm():
     c.commit()
-    l=Label(w,text="Initialisation complete",font=("Cambria",40),bg="#6883BC",fg="#8A307F", ).pack(side="top",padx=10,pady=10)
+    l=Label(w,text="Initialisation complete",font=("Century Gothic",20),bg="#6883BC",fg="#8A307F", ).pack(side="top",padx=10,pady=10)
     w.mainloop()
 
