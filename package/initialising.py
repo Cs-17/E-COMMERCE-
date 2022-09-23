@@ -40,10 +40,13 @@ def makeWindow():
     global w
     w=t.Tk()
     w.title("Shop Manager")
-    w.config(bg="#6883BC")
+    global universalBg,universalFont
+    universalBg="#8399c9"
+    universalFont="Century Gothic"
+    w.config(bg=universalBg)
     
 def confirm():
     c.commit()
-    l=Label(w,text="Initialisation complete",font=("Century Gothic",20),bg="#6883BC",fg="#8A307F", ).pack(side="top",padx=10,pady=10)
+    l=Label(w,text="Initialisation complete",font=(universalFont,20),bg=universalBg,fg="#8A307F", ).pack(side="top",padx=10,pady=10)
     w.mainloop()
 
