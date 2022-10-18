@@ -1,16 +1,16 @@
 import initialising as base
-def admin():
-    adminPass="UngaBunga"
-    adminPh=696969
+def admin():#login for admin
+    adminPass="TEST"#set login info for admins
+    adminPh=1234
     try:
         phNo=int(input("Enter phone number"))
-        pasw=input(input("Enter password"))
-    except TypeError:
+        pasw=input("Enter password")
+    except TypeError: #if phone number input includes non digit characters
         print("retry")
         return (admin())
-    if (phNo==adminPh and pasw==adminPass):
+    if (phNo==adminPh and pasw==adminPass):#if login successful
         print("Logged in")
         return (1)
-    else0:
+    else:
+        print("retry")
         return (admin())
-    
