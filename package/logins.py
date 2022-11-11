@@ -2,6 +2,8 @@ import initialising as base
 def admin():#login for admin
     adminPass="TEST"#set login info for admins
     adminPh=1234
+    #yet to be encrypted
+
     try:
         phNo=int(input("Enter phone number"))
         pasw=input("Enter password")
@@ -14,3 +16,4 @@ def admin():#login for admin
     else:
         print("retry")
         return (admin())
+    

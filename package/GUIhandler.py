@@ -18,3 +18,12 @@ def makeWindow():
     #wndw.mainloop()
 def done():
     messagebox.showinfo("showinfo", "Information")
+'''def makeWindow():
+    print()
+    global wndw
+    wndw=t.Tk()
+    wndw.title("Shop Manager")
+    global universalBg,universalFont
+    universalBg="#8399c9"
+    universalFont="Century Gothic"
+    wndw.config(bg=universalBg)'''
