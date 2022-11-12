@@ -48,11 +48,40 @@ def makeTables(handle):
     handle.commit()
     return (handle)
 
+def defaultEntries(handle):
+    curs=handle.cursor()
+    query = """
+        select * from customers;
+    """
+    curs.execute(query)
+    out=curs.fetchall()
+    if (out==[]):
+        query = """insert into customers
+        values
+        ("rupam", 580792, "apples", "141,451,451,451,231"),
+        ("ayush", 6746674, "bananas", "45,234,451,451,11"),
+        ("anisha", 46969, "onion", "123,345,11,11,231"),
+        ("chintu", 45643, "tree", "141,231,453,141,451"),
+        ("anna", 88853, "grass", "312,664,664,664,231");
+        """
+        curs.execute(query)
+        query = """insert into invewntory
+        values
+        ("rupam", 580792, "apples", "141,451,451,451,231"),
+        ("ayush", 6746674, "bananas", "45,234,451,451,11"),
+        ("anisha", 46969, "onion", "123,345,11,11,231"),
+        ("chintu", 45643, "tree", "141,231,453,141,451"),
+        ("anna", 88853, "grass", "312,664,664,664,231");
+        """
+        curs.execute(query)
+        handle.commit()
+        handle.commit()
 
 def make():
  #caller for rest
     handle=makeDB()# makes the db if non existent
 
     handle=makeTables(handle) #makes tables if non existent
+    defaultEntries(handle)
     print("done")
     return (handle)

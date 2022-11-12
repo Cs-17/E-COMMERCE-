@@ -18,23 +18,39 @@ def admin():#login for admin
 
 def newAcc(handle, pNo, pswd):
     curs=handle.cursor()
+
     name=input("Enter name, for new account registeration")
+
     query= """
     insert into customers VALUES ({},{},{},NULL);
     """.format(name,pNo,pswd)
     curs.execute(query)
     handle.commit()
+    #make new account
     print("Account registration complete\n")
-def customer(handle):
+
+
+
+def customer(handle): #customer login
     curs=handle.cursor()
-    pNo=int(input("Enter phone number"))
-    pswd=input("Enter password")
-    query="""
+    try:
+        pNo=int(input("Enter phone number"))#ask credentials
+        pswd=input("Enter password")
+    except:
+        print("Wrong input")
+        quit()
+    query=""" 
     select * from customers where ph= {}
-    """.format (pNo)
+    """.format (pNo) 
+    #get record of customers with given phne number
     curs.execute(query)
     disp=curs.fetchall()
-    print(disp)
-    if (disp==[]):
-        newAcc(handle,pNo,pswd)
-    return (pNo)
+
+    if (disp==[]):#if no record found
+        newAcc(handle,pNo,pswd) #make new account
+    elif (disp[0][2]!=pswd):
+        print("wrong passsword")
+        return (0)
+        quit()
+    else:
+        return (pNo)

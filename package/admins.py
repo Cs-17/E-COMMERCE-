@@ -1,13 +1,16 @@
 import mysql.connector as conec 
 
-def adder (handle):
+def adder (handle): #add an entry to inventory
     curs=handle.cursor()
+
     code=int(input("Enter item code"))
     product=input ("Enter product name")
     des=input ("Enter product description")
     qty= int(input("Enter available quantity"))
     price = float(input("Enter pricing") )
     cat= input("Enter category")
+    #all entries
+
     query = """
     insert into inventory values({},{},{},{},{},{});
     """.format(code,product,des,qty,price,cat)
@@ -17,6 +20,7 @@ def adder (handle):
 def disp(handle):
     #print the inventory table
     curs=handle.cursor()
+
     query="""
     select * from inventory;
     """
@@ -26,8 +30,9 @@ def disp(handle):
     for i in x: 
         print (i)
 
-def deleter(handle,code):
+def deleter(handle,code):#deletes an entry in inventory
     curs=handle.cursor()
+
     query=""" 
     DELETE from inventory 
     WHERE ITEM_CODE= {} ;
@@ -35,7 +40,7 @@ def deleter(handle,code):
     curs.execute(query)
     handle.commit()
 
-def mod(handle,code):
+def mod(handle,code):#modify elements of an entry according to choice
     curs=handle.cursor()
     text="""
     enter\n

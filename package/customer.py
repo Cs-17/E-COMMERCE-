@@ -51,7 +51,7 @@ def store(handle,pNo):
         SAME THING AS BELOW BUT WITH LOOP, DOESN'T WORK FOR SOME REASON
         """
         qty=qty-inpQty
-        query = "update inventory set qty ={} where item_code = {};".format(qty,inp)
+        query = "update inventory set qty ={} where item_code = {}".format(qty,inp)
         curs.execute(query)
         if (items==None):
             items=str(inp)
@@ -59,14 +59,14 @@ def store(handle,pNo):
         items = items + (","+ str(inp))*inpQty
         items=str(items)
         print(items)
-        query = """update customers set items= "{};" 
+        query = """update customers set items= "{}" 
         where ph= {}""".format(items,pNo)
         curs.execute(query)
         handle.commit()
 
 def cart (handle, pNo):
     curs=handle.cursor()
-    query= "select items from customers where ph = {};".format(pNo)
+    query= "select items from customers where ph = {} ;".format(pNo)
     curs.execute(query)
     items=curs.fetchall()[0][0]
     if (items==None):
@@ -79,7 +79,7 @@ def cart (handle, pNo):
     out=[]
 
     for i in items:
-        query= ( "select * from inventory where item_code = {};".format(i))
+        query= ( "select * from inventory where item_code = {} ;".format(i))
         curs.execute(query)
         x=((curs.fetchmany(1))[0])
         out.append(x)
@@ -120,7 +120,7 @@ def cart (handle, pNo):
     inp=input("enter c to checkout\n0 to go back to store\n1 to go remove an item")
     if (inp.lower()=="c"):
         print ("THANK YOU FOR SHOPPING")
-        query= "update customers set items = NULL where ph={};".format(pNo)
+        query= "update customers set items = NULL where ph={} ".format(pNo)
         curs.execute(query)
         handle.commit()
         quit()
@@ -129,21 +129,24 @@ def cart (handle, pNo):
     elif (inp=="1"):
         printer (out3)
         inp = int(input ("Enter item code to remove"))
-        intQty = int(input("Enter quantity to remove"))
+        inpQty = int(input("Enter quantity to remove"))
         out=[]
+        out2=[]
         for i in range(0,len(out3)):
             if (out3[i][0]==inp):
                 if (out3[i][3]>=inpQty):
-                    query="""select items from customers where ph ={}""".format(pNo)
+                    query="""select items from customers where ph ={} ;""".format(pNo)
                     curs.execute(query)
                     out=(curs.fetchall()[0][0]).split()
-                    for i in out and inpQty>0:
-                        if (i==str(inp)):
-                            inpQty-=1
-                            continue
-                        else:
-                            out.append(i)
-        print (out)
+                    print(out)
+                    for i in out:
+                        if (inpQty>0):
+                            if (i==str(inp)):
+                                inpQty-=1
+                                continue
+                            else:
+                                out2.append(i)
+        print (out2)
 
 def main (handle,pNo):
     while(1):
