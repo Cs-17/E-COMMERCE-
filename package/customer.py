@@ -3,11 +3,11 @@ import random
 def printer(disp):
     j=0
     for i in ["ITEM CODE", "NAME", "DESCRIPTION", "QUANTITY","PRICE", "CATEGORY"]:
-        print (i.ljust(15), end="")
+        print (i.ljust(20), end="")
     print()
     for i in disp:             
         for j in i:
-            print (str(j).ljust(15), end="") 
+            print (str(j).ljust(20), end="") 
         print()
 def store(handle,pNo):
     curs=handle.cursor()

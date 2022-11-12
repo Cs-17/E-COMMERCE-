@@ -21,10 +21,10 @@ def makeTables(handle):
     INVENTORY
     (ITEM_CODE INT NOT NULL PRIMARY KEY, 
     PRODUCT VARCHAR(30), 
-    DESCR VARCHAR(50), 
+    DESCR VARCHAR(200), 
     QTY INT, 
-    PRICE DOUBLE(6,2),
-    CAT VARCHAR(10))"""
+    PRICE DOUBLE(10,2),
+    CAT VARCHAR(20))"""
     #DISC INT )"""
     
     #table inventory with item code, product name, description, quantity, price, discount, category
@@ -36,7 +36,7 @@ def makeTables(handle):
 
     query= """CREATE TABLE IF NOT EXISTS 
     CUSTOMERS(
-    NAME VARCHAR(10),
+    NAME VARCHAR(20),
     PH INT NOT NULL PRIMARY KEY,
     PASSWORD VARCHAR(20),
     ITEMS VARCHAR(250));"""
@@ -65,16 +65,20 @@ def defaultEntries(handle):
         ("anna", 88853, "grass", "312,664,664,664,231");
         """
         curs.execute(query)
-        query = """insert into invewntory
+        handle.commit()
+        curs=handle.cursor()
+        query = """insert into inventory
         values
-        ("rupam", 580792, "apples", "141,451,451,451,231"),
-        ("ayush", 6746674, "bananas", "45,234,451,451,11"),
-        ("anisha", 46969, "onion", "123,345,11,11,231"),
-        ("chintu", 45643, "tree", "141,231,453,141,451"),
-        ("anna", 88853, "grass", "312,664,664,664,231");
+        (141, "bucket", "10L green, plastic",69,120,"home"),
+        (451, "television", "4K,75 inch, android",45,120000,"electronics"),
+        (231, "speaker", "5.1 100w",98,12000,"electronics"),
+        (45, "keyboard", "TKL mechanical",35,2500,"electronics"),
+        (11, "curtains", "dark green, blackout, ring mount",11,1589,"home"),
+        (453,"cookies", "chocolate chip",4,150,"confectionaries"),
+        (312,"nuts", "mixed",20,50,"confectionaries"),
+        (664,"candy", "green lollipops",100,10,"confectionaries");
         """
         curs.execute(query)
-        handle.commit()
         handle.commit()
 
 def make():

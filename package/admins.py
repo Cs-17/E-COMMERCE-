@@ -12,7 +12,7 @@ def adder (handle): #add an entry to inventory
     #all entries
 
     query = """
-    insert into inventory values({},{},{},{},{},{});
+    insert into inventory values({},"{}","{}",{},{},"{}");
     """.format(code,product,des,qty,price,cat)
     curs.execute(query)
     handle.commit()
@@ -56,7 +56,7 @@ def mod(handle,code):#modify elements of an entry according to choice
         inp=input("Enter new name for pre-entered code")
         query="""
         update inventory
-        set product= {}
+        set product= "{}"
         where ITEM_CODE= {}
         """.format(inp,code)
         curs.execute(query)
@@ -76,7 +76,7 @@ def mod(handle,code):#modify elements of an entry according to choice
         inp=input("Enter new description for pre-entered code")
         query="""
         update inventory
-        set descr= {}
+        set descr= "{}"
         where ITEM_CODE= {}
         """.format(inp,code)
         curs.execute(query)
@@ -95,11 +95,13 @@ def mod(handle,code):#modify elements of an entry according to choice
         inp=input("Enter new category for pre-entered code")
         query="""
         update inventory
-        set cat= {}
+        set cat= "{}"
         where ITEM_CODE= {}
         """.format(inp,code)
         curs.execute(query)
         handle.commit()
+
+
 def main (handle):
     print ("reached admins()")
     while(1):

@@ -22,7 +22,7 @@ def newAcc(handle, pNo, pswd):
     name=input("Enter name, for new account registeration")
 
     query= """
-    insert into customers VALUES ({},{},{},NULL);
+    insert into customers VALUES ("{}",{},"{}",NULL);
     """.format(name,pNo,pswd)
     curs.execute(query)
     handle.commit()
@@ -48,6 +48,7 @@ def customer(handle): #customer login
 
     if (disp==[]):#if no record found
         newAcc(handle,pNo,pswd) #make new account
+        return (pNo)
     elif (disp[0][2]!=pswd):
         print("wrong passsword")
         return (0)
