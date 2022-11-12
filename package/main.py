@@ -2,6 +2,7 @@
 import initialising as base #initialisation for sql
 import logins #methods to log customers and admin in
 import admins 
+import customer
 handle=base.make()
 consnt= input("Are you an admin?") #checks if admin or customer
 if ("y" in consnt.lower()): #case:admin
@@ -9,5 +10,6 @@ if ("y" in consnt.lower()): #case:admin
     if (logins.admin()): #if login valid
         admins.main(handle) # admin functions
 else:
-    x=logins.custo(handle) # customer login
-    
+    pNo=logins.customer(handle)
+    if (pNo): # customer login
+        customer.main(handle,pNo)

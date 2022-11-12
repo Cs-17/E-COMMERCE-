@@ -7,10 +7,10 @@ def adder (handle):
     des=input ("Enter product description")
     qty= int(input("Enter available quantity"))
     price = float(input("Enter pricing") )
-
+    cat= input("Enter category")
     query = """
-    insert into inventory values({},{},{},{},{})
-    """.format(code,product,des,qty,price)
+    insert into inventory values({},{},{},{},{},{});
+    """.format(code,product,des,qty,price,cat)
     curs.execute(query)
     handle.commit()
 
@@ -30,13 +30,12 @@ def deleter(handle,code):
     curs=handle.cursor()
     query=""" 
     DELETE from inventory 
-    WHERE ITEM_CODE={} ;
+    WHERE ITEM_CODE= {} ;
     """.format(code)
     curs.execute(query)
     handle.commit()
 
 def mod(handle,code):
-
     curs=handle.cursor()
     text="""
     enter\n
@@ -44,6 +43,7 @@ def mod(handle,code):
     2 to edit price\n
     3 to edit description\n
     4 to edit quantity
+    5. to edit category
     """
     inp=int(input(text))
 
@@ -86,6 +86,15 @@ def mod(handle,code):
         """.format(inp,code)
         curs.execute(query)
         handle.commit()
+    elif (inp==5):
+        inp=input("Enter new category for pre-entered code")
+        query="""
+        update inventory
+        set cat= {}
+        where ITEM_CODE= {}
+        """.format(inp,code)
+        curs.execute(query)
+        handle.commit()
 def main (handle):
     print ("reached admins()")
     while(1):
@@ -100,5 +109,4 @@ def main (handle):
             if (input ("enter 0 to delete\n1 to modify")=="0"):
                 deleter(handle, int(inp))
             else:
-                mod(handle,inp)              
-
+                mod(handle,inp)

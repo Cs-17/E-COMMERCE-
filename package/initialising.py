@@ -23,9 +23,10 @@ def makeTables(handle):
     PRODUCT VARCHAR(30), 
     DESCR VARCHAR(50), 
     QTY INT, 
-    PRICE DOUBLE(6,2), 
-    DISC INT )"""
-    #CAT VARCHAR(10))
+    PRICE DOUBLE(6,2),
+    CAT VARCHAR(10))"""
+    #DISC INT )"""
+    
     #table inventory with item code, product name, description, quantity, price, discount, category
     
     curs.execute(query)
@@ -38,7 +39,7 @@ def makeTables(handle):
     NAME VARCHAR(10),
     PH INT NOT NULL PRIMARY KEY,
     PASSWORD VARCHAR(20),
-    ITEMS VARCHAR(100));"""
+    ITEMS VARCHAR(250));"""
 
     #Create table customers with name, phone number (used as identifier), pass and tuple of items in cart
     curs.execute(query)
