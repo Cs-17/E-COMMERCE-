@@ -1,10 +1,8 @@
 #makes the db, tables and respective cursors.
 import mysql.connector as conec 
 
-def makeDB():
-    host1="localhost"
-    us= "cs"
-    passw="123456"
+def makeDB(host1,us,passw):
+    
     handle=conec.connect(host=host1,user =us,password=passw)
     curs =handle.cursor() #get cursor of sql without db
     curs.execute ("create database if not exists shop1")
@@ -70,7 +68,7 @@ def defaultEntries(handle):
         query = """insert into inventory
         values
         (141, "bucket", "10L green, plastic",69,120,"home"),
-        (451, "television", "4K,75 inch, android",45,120000,"electronics"),
+        (451, "television", "4K,75 inch",45,120000,"electronics"),
         (231, "speaker", "5.1 100w",98,12000,"electronics"),
         (45, "keyboard", "TKL mechanical",35,2500,"electronics"),
         (11, "curtains", "dark green, blackout, ring mount",11,1589,"home"),
@@ -81,9 +79,9 @@ def defaultEntries(handle):
         curs.execute(query)
         handle.commit()
 
-def make():
+def make(host1,us,passw):
  #caller for rest
-    handle=makeDB()# makes the db if non existent
+    handle=makeDB(host1,us,passw)# makes the db if non existent
 
     handle=makeTables(handle) #makes tables if non existent
     defaultEntries(handle)
