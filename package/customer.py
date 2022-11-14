@@ -39,7 +39,7 @@ def store(handle,pNo):
     #show all items
     if (inp.lower()=="all"):
         query="""select * from inventory;"""
-
+    
     # show items category wise
     else:
         cat=inp
@@ -97,6 +97,52 @@ def store(handle,pNo):
         curs.execute(query)
         handle.commit()
 
+#out3 is array of table of cart items
+def remover(out3, handle, pNo):
+    curs=handle.cursor()
+    printer (out3)
+
+    inp = int(input ("Enter item code to remove"))
+    inpQty = int(input("Enter quantity to remove"))
+
+    out=[]
+    out2=""
+
+    # for each item entry
+    for i in range(0,len(out3)):
+
+        #if item code is as entered
+        if (out3[i][0]==inp):
+
+            #if the removal requirement is <= that in cart
+            if (out3[i][3]>=inpQty):
+
+                query="""select items from customers where ph ={} ;""".format(pNo)
+                curs.execute(query)
+                out=(curs.fetchall()[0][0]).split()
+
+                #itemList contains all non unique item numbers
+                itemList=out[0].split(",")
+                print(itemList)
+
+                #for as many times removal is required, remove said item
+                for i in range (0,inpQty):
+                    itemList.remove(str(inp))
+
+                #make an array from edited list
+                for i in itemList:
+                    out2+=(i + ",")
+                #clean out last comma
+                out2=out2[:len(out2)-1]
+
+    #write to table new item list
+    query= """
+    update customers set items= "{}" where ph= {} ;
+    """.format(out2, pNo)
+    curs.execute(query)
+    query= """update inventory set qty =qty+{} where item_code= {}""".format(inpQty, inp)
+    curs.execute(query)
+    handle.commit()
 def cart (handle, pNo):
     curs=handle.cursor()
 
@@ -176,31 +222,8 @@ def cart (handle, pNo):
     elif (inp=="0"): #return to store
         store(handle,pNo)
     elif (inp=="1"):
-        printer (out3)
-        inp = int(input ("Enter item code to remove"))
-        inpQty = int(input("Enter quantity to remove"))
-        out=[]
-        out2=[]
-        for i in range(0,len(out3)):
-            if (out3[i][0]==inp):
-                if (out3[i][3]>=inpQty):
-                    query="""select items from customers where ph ={} ;""".format(pNo)
-                    curs.execute(query)
-                    out=(curs.fetchall()[0][0]).split()
-                    print("this is out 0",out[0].split(","))
-                    for i in out[0].split(","):
-                        print(i)
-                        if (inpQty>0):
-                            print ("flag")
-                            print(str(inp))
-                            if (i==str(inp)):
-                                inpQty-=1
-                                continue
-                            else:
-                                print("flag2")
-                                out2.append(i)
-        print (out2)
-
+        remover(out3,handle,pNo)
+        
 def main (handle,pNo):
     while(1):
         inp=int(input("\n press 1 to view products and\n 2 to see cart"))

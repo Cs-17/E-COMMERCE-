@@ -2,7 +2,6 @@
 import mysql.connector as conec 
 
 def makeDB(host1,us,passw):
-    
     handle=conec.connect(host=host1,user =us,password=passw)
     curs =handle.cursor() #get cursor of sql without db
     curs.execute ("create database if not exists shop1")
@@ -79,10 +78,39 @@ def defaultEntries(handle):
         curs.execute(query)
         handle.commit()
 
-def make(host1,us,passw):
- #caller for rest
-    handle=makeDB(host1,us,passw)# makes the db if non existent
+def make():
+    host1="localhost"
+    #check if file for cred exists create if not
+    try:
+        f=open("aaa.txt", "r")
+    except:
+        f=open("aaa.txt","w")
+    f=open("aaa.txt", "r")
+    curFile=(f.read())
 
+    #check if file is empty, ie new....indirectly checks if first run in system
+    if (curFile=="" ):#curFile==[]):
+        #ask for credentials
+        s=input("enter username for sql")
+        passw=input("enter username for sql")
+        f.close()
+
+        #write to file
+        #yet to encrypt
+        f=open("aaa.txt", "w")
+        f.writelines([s,",",passw])
+        f.flush
+        f.close()
+
+    #get the sql credentials from file
+    f=open("aaa.txt", "r")
+    creds=(f.readlines())
+    f.close()
+    #make array username and password
+    creds=creds[0].split(",")
+    
+    #call based on said data
+    handle=makeDB(host1,creds[0],creds[1])# makes the db if non existent
     handle=makeTables(handle) #makes tables if non existent
     defaultEntries(handle)
     print("done")

@@ -3,15 +3,9 @@ import initialising as base #initialisation for sql
 import logins #methods to log customers and admin in
 import admins 
 import customer
-host1="localhost"
-us= "cs"
-passw="1234567"
-try:
-    handle=base.make(host1,us,passw)
-except:
-    print("conn failed")
-    #us=input("enter username for sql")
-
+import pickle
+#makes sql db, and file for credentials
+handle=base.make()
 consnt= input("Are you an admin?") #checks if admin or customer
 
 if ("y" in consnt.lower()): #case:admin
