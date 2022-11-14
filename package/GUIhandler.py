@@ -1,24 +1,25 @@
 from tkinter import *
 import tkinter
-window=Tk()
-window.title("Mountain Stores")
+def initial():
+    window=Tk()
+    window.title("Mountain Stores")
 
-x_axis=(window.winfo_screenwidth())
-y_axis=(window.winfo_screenheight())
+    x_axis=(window.winfo_screenwidth())
+    y_axis=(window.winfo_screenheight())
 
-winx=int(x_axis*0.7)
-winy=int(y_axis*0.7)
+    winx=int(x_axis*0.7)
+    winy=int(y_axis*0.7)
 
-window.geometry("{}x{}".format(winx,winy))
-window.resizable(False,False)
-window.attributes('-topmost', 1)
-#bgimg=tkinter.PhotoImage(file="./EXTRAS/logo.jpg")
-#l1=Label(window,i=bgimg)
-#l1.pack()
-window.configure(bg='yellow')
-window.iconbitmap('./EXTRAS/logo.ico')
-window.mainloop()
-
+    window.geometry("{}x{}".format(winx,winy))
+    window.resizable(False,False)
+    window.attributes('-topmost', 1)
+    #bgimg=tkinter.PhotoImage(file="./EXTRAS/logo.jpg")
+    #l1=Label(window,i=bgimg)
+    #l1.pack()
+    window.configure(bg='yellow')
+    window.iconbitmap('./EXTRAS/logo.ico')
+    window.mainloop()
+    return()
 
 
 

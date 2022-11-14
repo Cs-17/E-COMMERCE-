@@ -4,6 +4,7 @@ import logins #methods to log customers and admin in
 import admins 
 import customer
 import pickle
+import GUIhandler as g
 #makes sql db, and file for credentials
 handle=base.make()
 consnt= input("Are you an admin?") #checks if admin or customer
