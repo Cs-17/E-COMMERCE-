@@ -3,27 +3,20 @@ import tkinter
 window=Tk()
 window.title("Mountain Stores")
 
-pNo = StringVar()
-pasw=StringVar()
-name=StringVar()
-
 x_axis=(window.winfo_screenwidth())
 y_axis=(window.winfo_screenheight())
+
 winx=int(x_axis*0.7)
 winy=int(y_axis*0.7)
 
 window.geometry("{}x{}".format(winx,winy))
 window.resizable(False,False)
 window.attributes('-topmost', 1)
+#bgimg=tkinter.PhotoImage(file="./EXTRAS/logo.jpg")
+#l1=Label(window,i=bgimg)
+#l1.pack()
 window.configure(bg='yellow')
 window.iconbitmap('./EXTRAS/logo.ico')
-
-
-def loginPage():
-    e1=Entry(window,textvariable=pNo)
-    e1.pack()
-    
-loginPage()
 window.mainloop()
 
 

@@ -4,8 +4,6 @@ import logins #methods to log customers and admin in
 import admins 
 import customer
 import pickle
-import GUIhandler as g
-#g.window.mainloop()
 #makes sql db, and file for credentials
 handle=base.make()
 consnt= input("Are you an admin?") #checks if admin or customer
@@ -18,3 +16,4 @@ else:
     pNo=logins.customer(handle)
     if (pNo): # customer login success
         customer.main(handle,pNo)
+

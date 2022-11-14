@@ -1,5 +1,6 @@
-
-f=open("aaa.txt", "r")
-for i in f.read():
-    print(i)
-    print("\n")
+import GUIhandler as g
+def task():
+    print("hello")
+    g.window.after(5000, task())
+g.window.after(5000,task())
+g.window.mainloop()
